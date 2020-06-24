@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    devServer: {
+        historyApiFallback: true,
+    },
     entry: './src/index',
     module: {
         rules: [
@@ -11,7 +14,7 @@ module.exports = {
             { test: /\.(jpg|png)$/, use: { loader: 'file-loader', options: { name: '[path][name].[hash].[ext]' } } },
         ],
     },
-    output: { path: path.join(__dirname, '/dist'), filename: 'bundle.js' },
+    output: { path: path.join(__dirname, '/dist'), filename: 'bundle.js', publicPath: '/' },
     plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
     resolve: { extensions: ['.ts', '.tsx', '.js'] },
 };
