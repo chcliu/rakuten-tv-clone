@@ -1,13 +1,29 @@
 import React from 'react';
 
-import '../styles/index.scss';
+import Header from './Header';
 
-class App extends React.PureComponent {
-    render() {
+interface State {
+    currentMovie: string;
+}
+
+class App extends React.PureComponent<{}, State> {
+    constructor(props: {}) {
+        super(props);
+        this.state = {
+            currentMovie: '',
+        };
+    }
+
+    setCurrentMovie(movie: string): void {
+        this.setState({ currentMovie: movie });
+    }
+
+    render(): JSX.Element {
+        const { currentMovie } = this.state;
         return (
-            <div>
-                <h1>Wassssaaaaaaap</h1>
-            </div>
+            <>
+                <Header currentMovie={currentMovie} />
+            </>
         );
     }
 }
