@@ -10,7 +10,7 @@ const LoadingScreen = ({ isLoading }: Props): JSX.Element => (
         {isLoading && (
             <>
                 <figure className="loading-screen">
-                    <h1>Fetching Movies...</h1>
+                    <h1>Loading...</h1>
                     <div className="loading-wheel">
                         <div className="loading-wheel1 loading-child"></div>
                         <div className="loading-wheel2 loading-child"></div>

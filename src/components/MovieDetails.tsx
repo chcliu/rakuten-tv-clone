@@ -6,8 +6,9 @@ import { Movie } from '../types';
 import axios from 'axios';
 
 interface Props {
-    setCurrentMovie: (movie: Movie) => void;
     currentMovie: Movie | null;
+    setCurrentMovie: (movie: Movie) => void;
+    setIsLoading: (isLoading: boolean) => void;
 }
 interface State {
     isVideoOpen: boolean;
@@ -26,7 +27,10 @@ class MovieDetails extends React.Component<Props, State> {
     }
 
     componentDidMount(): void {
-        this.fetchTrailer().then((trailerUrl) => this.setState({ trailerUrl }));
+        const { setIsLoading } = this.props;
+        this.fetchTrailer()
+            .then((trailerUrl) => this.setState({ trailerUrl }))
+            .finally(() => setIsLoading(false));
     }
 
     fetchTrailer(): Promise<string> {
@@ -53,6 +57,11 @@ class MovieDetails extends React.Component<Props, State> {
     }
 
     onTrailerButtonClick(): void {
+        const { trailerUrl } = this.state;
+        const { setIsLoading } = this.props;
+
+        if (!trailerUrl) setIsLoading(true);
+
         this.setState({ isVideoOpen: true });
     }
 
