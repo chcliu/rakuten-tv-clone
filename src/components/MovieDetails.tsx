@@ -1,27 +1,68 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React from 'react';
 import '../styles/index.scss';
 import { Movie } from '../types';
+
+import axios from 'axios';
 
 interface Props {
     setCurrentMovie: (movie: Movie) => void;
     currentMovie: Movie | null;
 }
-interface State {}
+interface State {
+    isVideoOpen: boolean;
+    trailerUrl: string;
+}
 
-class Main extends React.Component<Props, State> {
+class MovieDetails extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            currentMovie: props.currentMovie,
+            isVideoOpen: false,
+            trailerUrl: '',
         };
+
+        this.onTrailerButtonClick = this.onTrailerButtonClick.bind(this);
+    }
+
+    componentDidMount(): void {
+        this.fetchTrailer().then((trailerUrl) => this.setState({ trailerUrl }));
+    }
+
+    fetchTrailer(): Promise<string> {
+        const { currentMovie } = this.props;
+
+        const payload = {
+            audio_language: 'SPA',
+            audio_quality: '2.0',
+            content_id: currentMovie?.id,
+            content_type: 'movies',
+            device_serial: 'device_serial_1',
+            device_stream_video_quality: 'FHD',
+            player: 'web:PD-NONE',
+            subtitle_language: 'MIS',
+            video_type: 'trailer',
+        };
+
+        return axios
+            .post(
+                'https://cors-anywhere.herokuapp.com/https://gizmo.rakuten.tv/v3/me/streamings?classification_id=5&device_identifier=web&locale=es&market_code=es',
+                payload,
+            )
+            .then(({ data }) => data.data.stream_infos[0].url);
+    }
+
+    onTrailerButtonClick(): void {
+        this.setState({ isVideoOpen: true });
     }
 
     render(): JSX.Element {
         const { currentMovie, setCurrentMovie } = this.props;
+        const { isVideoOpen, trailerUrl } = this.state;
 
         return (
             <>
-                {currentMovie && (
+                {currentMovie && !isVideoOpen && (
                     <article className="movie-details">
                         <img
                             className="movie-details__snapshot"
@@ -29,10 +70,18 @@ class Main extends React.Component<Props, State> {
                             alt={currentMovie.title}
                         />
                         <img
+                            onClick={this.onTrailerButtonClick}
                             className="movie-details__trailer-button"
                             src="src/assets/play-video.png"
                             alt="play trailer button"
                         />
+                    </article>
+                )}
+                {currentMovie && isVideoOpen && (
+                    <article className="video-player">
+                        <video controls>
+                            <source src={trailerUrl} type="video/mp4" />
+                        </video>
                     </article>
                 )}
             </>
@@ -40,4 +89,4 @@ class Main extends React.Component<Props, State> {
     }
 }
 
-export default Main;
+export default MovieDetails;
