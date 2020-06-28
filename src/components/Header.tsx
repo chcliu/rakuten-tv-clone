@@ -7,7 +7,9 @@ interface Props {
 }
 
 const Header = ({ currentMovie }: Props): JSX.Element => (
-    <header>{currentMovie ? <h1>{currentMovie.title}</h1> : <img className="logo" src="src/assets/logo.png" />}</header>
+    <header>
+        {currentMovie ? <h1>{currentMovie.title}</h1> : <img className="logo" src="src/assets/rakuten-logo.png" />}
+    </header>
 );
 
 export default Header;
