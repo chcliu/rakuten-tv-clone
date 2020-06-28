@@ -13,7 +13,7 @@ const Header = ({ currentMovie }: Props): JSX.Element => (
             <h1>{currentMovie}</h1>
         ) : (
             <Link to="/">
-                <h1>Rakuten TV</h1>
+                <img className="logo" src="src/assets/logo.png" />
             </Link>
         )}
     </header>
