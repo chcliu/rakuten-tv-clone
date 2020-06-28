@@ -3,7 +3,7 @@ import '../styles/index.scss';
 import { Movie } from '../types';
 
 import Lists from './Lists';
-import MoviePage from './MoviePage';
+import MovieDetails from './MovieDetails';
 
 interface Props {
     setCurrentMovie: (movie: Movie) => void;
@@ -27,8 +27,11 @@ class Main extends React.Component<Props, State> {
 
         return (
             <main>
-                <Lists setCurrentMovie={setCurrentMovie} setIsLoading={setIsLoading} />
-                {/* <MoviePage currentMovie={currentMovie} setCurrentMovie={setCurrentMovie} /> */}
+                {currentMovie ? (
+                    <MovieDetails currentMovie={currentMovie} setCurrentMovie={setCurrentMovie} />
+                ) : (
+                    <Lists setCurrentMovie={setCurrentMovie} setIsLoading={setIsLoading} />
+                )}
             </main>
         );
     }

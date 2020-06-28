@@ -1,0 +1,23 @@
+.movie-details {
+    width: 100%;
+    height: 100%;
+}
+
+.movie-details__snapshot {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.movie-details__trailer-button {
+    cursor: pointer;
+    z-index: 1000;
+
+    height: 30%;
+    width: auto;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

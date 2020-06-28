@@ -4,6 +4,7 @@
 @import 'components/header';
 @import 'components/loading-screen';
 @import 'components/movie-lists';
+@import 'components/movie-details';
 
 html,
 body,
@@ -14,6 +15,14 @@ body,
     padding: 0;
 
     background-color: $color-black;
+}
+
+main {
+    height: 92%;
+}
+
+figure {
+    margin: 0;
 }
 
 h1 {
