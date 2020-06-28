@@ -7,7 +7,6 @@ import axios from 'axios';
 
 interface Props {
     currentMovie: Movie | null;
-    setCurrentMovie: (movie: Movie) => void;
     setIsLoading: (isLoading: boolean) => void;
 }
 interface State {
@@ -66,7 +65,7 @@ class MovieDetails extends React.Component<Props, State> {
     }
 
     render(): JSX.Element {
-        const { currentMovie, setCurrentMovie } = this.props;
+        const { currentMovie } = this.props;
         const { isVideoOpen, trailerUrl } = this.state;
 
         return (

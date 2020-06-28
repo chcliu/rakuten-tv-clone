@@ -28,11 +28,7 @@ class Main extends React.Component<Props, State> {
         return (
             <main>
                 {currentMovie ? (
-                    <MovieDetails
-                        currentMovie={currentMovie}
-                        setCurrentMovie={setCurrentMovie}
-                        setIsLoading={setIsLoading}
-                    />
+                    <MovieDetails currentMovie={currentMovie} setIsLoading={setIsLoading} />
                 ) : (
                     <Lists setCurrentMovie={setCurrentMovie} setIsLoading={setIsLoading} />
                 )}

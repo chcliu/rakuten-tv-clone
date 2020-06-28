@@ -23,7 +23,7 @@ class App extends React.PureComponent<{}, State> {
         this.setIsLoading = this.setIsLoading.bind(this);
     }
 
-    setCurrentMovie(movie: Movie): void {
+    setCurrentMovie(movie: Movie | null): void {
         this.setState({ currentMovie: movie });
     }
 
@@ -35,7 +35,7 @@ class App extends React.PureComponent<{}, State> {
         const { currentMovie, isLoading } = this.state;
         return (
             <>
-                <Header currentMovie={currentMovie} />
+                <Header currentMovie={currentMovie} setCurrentMovie={this.setCurrentMovie} />
                 <Main
                     currentMovie={currentMovie}
                     setCurrentMovie={this.setCurrentMovie}
