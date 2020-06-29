@@ -1,6 +1,6 @@
-# Rakuten TV Test
+# Rakuten TV Clone
 
-This repo is a mockup of the Rakuten TV application made using React OOP and Sass as requested in the test documentation.
+This repo is a mockup of the Rakuten TV application made using React OOP and Sass as requested.
 
 It uses Typescript / React / Sass using a self-made Webpack / Babel bundle.
 
